@@ -1,5 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MvcSuperShop.Data;
 using MvcSuperShop.Infrastructure.Context;
 
@@ -15,9 +17,18 @@ public class BaseController : Controller
     }
     protected CurrentCustomerContext GetCurrentCustomerContext()
     {
-        if (User.Identity.IsAuthenticated) return null;
+        if (!User.Identity.IsAuthenticated) return null;
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var email = User.FindFirstValue(ClaimTypes.Email);
-        return new CurrentCustomerContext { Email = email, UserId = Guid.Parse(userId) };
+        return new CurrentCustomerContext
+        {
+            Email = email, 
+            UserId = Guid.Parse(userId),
+            Agreements = _context
+                .UserAgreements.Include(e => e.Agreement)
+                .ThenInclude(e => e.AgreementRows)
+                .Where(e => e.Email == email).Select(e=>e.Agreement).ToList()
+
+        };
     }
 }
