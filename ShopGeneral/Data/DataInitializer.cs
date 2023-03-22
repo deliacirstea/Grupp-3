@@ -1,11 +1,9 @@
 ﻿using Bogus;
 using Bogus.DataSets;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
-namespace MvcSuperShop.Data;
+namespace ShopGeneral.Data;
 
 public class DataInitializer
 {
@@ -32,23 +30,23 @@ public class DataInitializer
 
     private void SeedUserAgreements()
     {
-        if (_context.UserAgreements.Any()) return;
+        if (Queryable.Any<UserAgreements>(_context.UserAgreements)) return;
         _context.UserAgreements.Add(new UserAgreements
         {
             Email = "stefan.holmberg@customer.systementor.se",
-            Agreement = _context.Agreements.First(e=>e.Name == "Nacka kommun")
+            Agreement = Queryable.First<Agreement>(_context.Agreements, e=>e.Name == "Nacka kommun")
         });
         _context.UserAgreements.Add(new UserAgreements
         {
             Email = "stefan.holmberg@vipcustomer.systementor.se",
-            Agreement = _context.Agreements.First(e => e.Name == "Hederlige Harry Superdeal")
+            Agreement = Queryable.First<Agreement>(_context.Agreements, e => e.Name == "Hederlige Harry Superdeal")
         });
         _context.SaveChanges();
     }
 
     private void SeedAgreements()
     {
-        if (_context.Agreements.Any()) return;
+        if (Queryable.Any<Agreement>(_context.Agreements)) return;
 
         _context.Agreements.Add(new Agreement
         {
@@ -100,7 +98,7 @@ public class DataInitializer
 
     private void SeedProducts()
     {
-        if (_context.Products.Any()) return;
+        if (Queryable.Any<Product>(_context.Products)) return;
 
 
         for (int i = 0; i < 100; i++)

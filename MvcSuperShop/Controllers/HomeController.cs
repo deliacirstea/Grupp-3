@@ -2,9 +2,9 @@
 using MvcSuperShop.Models;
 using System.Diagnostics;
 using AutoMapper;
-using MvcSuperShop.Data;
-using MvcSuperShop.Services;
 using MvcSuperShop.ViewModels;
+using ShopGeneral.Data;
+using ShopGeneral.Services;
 
 namespace MvcSuperShop.Controllers
 {

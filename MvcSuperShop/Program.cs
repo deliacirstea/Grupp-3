@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MvcSuperShop.Data;
 using MvcSuperShop.Infrastructure.Profiles;
-using MvcSuperShop.Services;
+using ShopGeneral.Data;
+using ShopGeneral.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +24,7 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IPricingService, PricingService>();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(ShopGeneral.Infrastructure.Profiles.ProductProfile));
 
 var app = builder.Build();
 

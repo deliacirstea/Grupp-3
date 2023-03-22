@@ -1,6 +1,6 @@
-﻿using MvcSuperShop.Data;
+﻿using ShopGeneral.Data;
 
-namespace MvcSuperShop.Services;
+namespace ShopGeneral.Services;
 
 public class CategoryService : ICategoryService
 {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using MvcSuperShop.Data;
-using MvcSuperShop.Infrastructure.Context;
+using ShopGeneral.Data;
+using ShopGeneral.Infrastructure.Context;
 
-namespace MvcSuperShop.Services;
+namespace ShopGeneral.Services;
 
 public  class ProductService : IProductService
 {

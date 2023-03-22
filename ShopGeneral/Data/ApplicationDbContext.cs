@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcSuperShop.Data
+namespace ShopGeneral.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

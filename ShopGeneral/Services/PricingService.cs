@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using MvcSuperShop.Data;
-using MvcSuperShop.Infrastructure.Context;
+﻿using ShopGeneral.Data;
+using ShopGeneral.Infrastructure.Context;
 
-namespace MvcSuperShop.Services;
+namespace ShopGeneral.Services;
 
 public class PricingService : IPricingService
 {
@@ -44,11 +42,11 @@ public class PricingService : IPricingService
         var productCheck = !string.IsNullOrEmpty(agreementRow.ProductMatch);
         var categoryCheck = !string.IsNullOrEmpty(agreementRow.CategoryMatch);
         var manufacturerCheck = !string.IsNullOrEmpty(agreementRow.ManufacturerMatch);
-        if (productCheck && !product.Name.ToLower().Contains(agreementRow.ProductMatch.ToLower()))
+        if (productCheck && !product.Name.ToLower().Contains((string)agreementRow.ProductMatch.ToLower()))
             return false;
-        if (categoryCheck && !product.Name.ToLower().Contains(agreementRow.CategoryMatch.ToLower()))
+        if (categoryCheck && !product.Name.ToLower().Contains((string)agreementRow.CategoryMatch.ToLower()))
             return false;
-        if (manufacturerCheck && !product.Name.ToLower().Contains(agreementRow.ManufacturerMatch.ToLower()))
+        if (manufacturerCheck && !product.Name.ToLower().Contains((string)agreementRow.ManufacturerMatch.ToLower()))
             return false;
 
         return true;

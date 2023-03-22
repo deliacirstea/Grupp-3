@@ -1,6 +1,6 @@
-﻿using MvcSuperShop.Data;
+﻿using ShopGeneral.Data;
 
-namespace MvcSuperShop.Infrastructure.Context;
+namespace ShopGeneral.Infrastructure.Context;
 
 public class CurrentCustomerContext
 {

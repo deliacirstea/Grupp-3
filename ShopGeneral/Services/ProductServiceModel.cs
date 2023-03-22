@@ -1,4 +1,4 @@
-﻿namespace MvcSuperShop.Services;
+﻿namespace ShopGeneral.Services;
 
 public class ProductServiceModel
 {

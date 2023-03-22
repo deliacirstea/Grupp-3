@@ -2,8 +2,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MvcSuperShop.Data;
-using MvcSuperShop.Infrastructure.Context;
+using ShopGeneral.Data;
+using ShopGeneral.Infrastructure.Context;
 
 namespace MvcSuperShop.Controllers;
 

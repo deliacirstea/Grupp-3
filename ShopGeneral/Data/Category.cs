@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MvcSuperShop.Data;
+namespace ShopGeneral.Data;
 
 public class Category
 {

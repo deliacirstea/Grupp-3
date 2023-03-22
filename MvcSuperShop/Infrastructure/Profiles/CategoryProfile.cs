@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MvcSuperShop.Data;
 using MvcSuperShop.ViewModels;
+using ShopGeneral.Data;
 
 namespace MvcSuperShop.Infrastructure.Profiles;
 

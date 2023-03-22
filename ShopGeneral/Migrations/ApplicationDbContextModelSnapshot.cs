@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MvcSuperShop.Data;
+using ShopGeneral.Data;
 
 #nullable disable
 
-namespace MvcSuperShop.Migrations
+namespace ShopGeneral.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -224,7 +224,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Agreement", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Agreement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -251,7 +251,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("Agreements");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.AgreementRow", b =>
+            modelBuilder.Entity("ShopGeneral.Data.AgreementRow", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +281,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("AgreementRow");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Category", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -304,7 +304,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Manufacturer", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -327,7 +327,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("Manufacturers");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Product", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -366,7 +366,7 @@ namespace MvcSuperShop.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.UserAgreements", b =>
+            modelBuilder.Entity("ShopGeneral.Data.UserAgreements", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -442,22 +442,22 @@ namespace MvcSuperShop.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.AgreementRow", b =>
+            modelBuilder.Entity("ShopGeneral.Data.AgreementRow", b =>
                 {
-                    b.HasOne("MvcSuperShop.Data.Agreement", null)
+                    b.HasOne("ShopGeneral.Data.Agreement", null)
                         .WithMany("AgreementRows")
                         .HasForeignKey("AgreementId");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Product", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Product", b =>
                 {
-                    b.HasOne("MvcSuperShop.Data.Category", "Category")
+                    b.HasOne("ShopGeneral.Data.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MvcSuperShop.Data.Manufacturer", "Manufacturer")
+                    b.HasOne("ShopGeneral.Data.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -468,9 +468,9 @@ namespace MvcSuperShop.Migrations
                     b.Navigation("Manufacturer");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.UserAgreements", b =>
+            modelBuilder.Entity("ShopGeneral.Data.UserAgreements", b =>
                 {
-                    b.HasOne("MvcSuperShop.Data.Agreement", "Agreement")
+                    b.HasOne("ShopGeneral.Data.Agreement", "Agreement")
                         .WithMany()
                         .HasForeignKey("AgreementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -479,7 +479,7 @@ namespace MvcSuperShop.Migrations
                     b.Navigation("Agreement");
                 });
 
-            modelBuilder.Entity("MvcSuperShop.Data.Agreement", b =>
+            modelBuilder.Entity("ShopGeneral.Data.Agreement", b =>
                 {
                     b.Navigation("AgreementRows");
                 });

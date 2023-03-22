@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcSuperShop.Data;
+namespace ShopGeneral.Data;
 
 
 [Index(nameof(UserAgreements.Email))]

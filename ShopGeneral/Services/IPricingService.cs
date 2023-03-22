@@ -1,6 +1,6 @@
-﻿using MvcSuperShop.Infrastructure.Context;
+﻿using ShopGeneral.Infrastructure.Context;
 
-namespace MvcSuperShop.Services;
+namespace ShopGeneral.Services;
 
 public interface IPricingService
 {
