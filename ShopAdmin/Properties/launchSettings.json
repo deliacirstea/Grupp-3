@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ShopAdmin": {
+      "commandName": "Project",
+      "commandLineArgs": "agreement expires --days 30"
+    }
+  }
+}
