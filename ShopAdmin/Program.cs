@@ -13,7 +13,14 @@ builder.ConfigureServices((ctx, services) =>
         options.UseSqlServer(connectionString));
     services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+    services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
     services.AddTransient<IAgreementService, AgreementService>();
+    services.AddTransient<DataInitializer>();
     // Using Cysharp/ZLogger for logging to file
     //services.AddLogging(logging =>
     //{
@@ -22,6 +29,13 @@ builder.ConfigureServices((ctx, services) =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataInitializer = scope.ServiceProvider.GetService<DataInitializer>();
+    dataInitializer.SeedData();
+}
+
 
 app.AddAllCommandType();
 app.Run();

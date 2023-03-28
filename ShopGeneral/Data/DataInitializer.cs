@@ -128,6 +128,7 @@ public class DataInitializer
                 manufacturer = new Manufacturer
                 {
                     Name = manufacturerName,
+                    EmailReport = "info@" + manufacturerName.ToLower() + ".se",
                     Icon = GetFaIcon()
                 };
                 _context.Manufacturers.Add(manufacturer);
