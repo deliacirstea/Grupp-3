@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\Product.cs" />
+    <Compile Remove="Commands\ProductVerifyImage.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
   </ItemGroup>
@@ -26,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Commands\Product.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
@@ -34,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MvcSuperShop\MvcSuperShop.csproj" />
+    <ProjectReference Include="..\ShopGeneral\ShopGeneral.csproj" />
   </ItemGroup>
 
 </Project>

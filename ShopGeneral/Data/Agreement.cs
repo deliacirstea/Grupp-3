@@ -23,5 +23,5 @@ public class AgreementRow
     public string? ProductMatch { get; set; }
     public string? CategoryMatch { get; set; }
 
-    public decimal PercentageDiscount { get; set; } 
+    public decimal PercentageDiscount { get; set; }
 }
