@@ -13,6 +13,7 @@ public class BaseController : Controller
 
     public BaseController(ApplicationDbContext context)
     {
+        // Hello
         _context = context;
     }
     protected CurrentCustomerContext GetCurrentCustomerContext()
