@@ -62,8 +62,8 @@ namespace ShopAdmin.Commands
                     Rating = 0,
                     Stock = 0,
                     Discount = 0,
-                    Brand = currentProduct.Manufacturer.Name,
-                    Category = currentProduct.Category.Name,
+                    Brand = currentProduct.Manufacturer != null ? currentProduct.Manufacturer.Name : "",
+                    Category = currentProduct.Category != null ? currentProduct.Category.Name : "",
                     Image = currentProduct.ImageUrl,
                 };
                 products.Add(product);
@@ -72,10 +72,10 @@ namespace ShopAdmin.Commands
             ExportProduct result = new() { products = products, total = products.Count };
 
             string directoryPath = $"outfiles\\{to}\\";
-            string filePath = $"{DateTime.UtcNow:yyyyMMdd}.txt";
+            string filePath = $"{directoryPath}\\{DateTime.UtcNow:yyyyMMdd}.txt";
 
             // Serialize model to json string
-            string json = JsonSerializer.Serialize(result);
+            string json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true });
 
             // Output to file
             Directory.CreateDirectory(directoryPath); // Make sure all directories exists
@@ -84,8 +84,7 @@ namespace ShopAdmin.Commands
             _logger.LogInformation("Export ending");
         }
 
-
-            private static bool DoesImageExist(string imageUrl)
+        private static bool DoesImageExist(string imageUrl)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageUrl);
             request.Method = "HEAD";
