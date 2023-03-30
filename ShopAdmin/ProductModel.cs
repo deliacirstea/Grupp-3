@@ -42,7 +42,7 @@ namespace ShopAdmin
             Image = image;
 
         }
-
+        //
 
 
 
