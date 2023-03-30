@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using ShopAdmin.Models;
 using ShopGeneral.Data;
 using System.Net;
+using System.Text.Json;
 
 namespace ShopAdmin.Commands
 {
@@ -44,8 +46,46 @@ namespace ShopAdmin.Commands
 
             _logger.LogInformation("VerifyImage ending");
         }
+        public void export(string to)
+        {
+            _logger.LogInformation("Export starting");
 
-        private static bool DoesImageExist(string imageUrl)
+            List<ProductModel> products = new();
+            foreach (var currentProduct in _dbContext.Products)
+            {
+                ProductModel product = new()
+                {
+                    ID = currentProduct.Id,
+                    Title = currentProduct.Name,
+                    Description = "",
+                    Price = currentProduct.BasePrice,
+                    Rating = 0,
+                    Stock = 0,
+                    Discount = 0,
+                    Brand = currentProduct.Manufacturer.Name,
+                    Category = currentProduct.Category.Name,
+                    Image = currentProduct.ImageUrl,
+                };
+                products.Add(product);
+            }
+
+            ExportProduct result = new() { products = products, total = products.Count };
+
+            string directoryPath = $"outfiles\\{to}\\";
+            string filePath = $"{DateTime.UtcNow:yyyyMMdd}.txt";
+
+            // Serialize model to json string
+            string json = JsonSerializer.Serialize(result);
+
+            // Output to file
+            Directory.CreateDirectory(directoryPath); // Make sure all directories exists
+            File.WriteAllText(filePath, json);
+
+            _logger.LogInformation("Export ending");
+        }
+
+
+            private static bool DoesImageExist(string imageUrl)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageUrl);
             request.Method = "HEAD";
