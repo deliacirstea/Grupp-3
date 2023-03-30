@@ -2,7 +2,7 @@
   "profiles": {
     "ShopAdmin": {
       "commandName": "Project",
-      "commandLineArgs": "agreement expires --days 30"
+      "commandLineArgs": "product verifyimage\r\nagreement expires --days 30"
     }
   }
 }
