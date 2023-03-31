@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ShopAdmin.Models;
-using ShopGeneral.Data;
+using ShopGeneral.Services;
 using System.Net;
 using System.Text.Json;
 
@@ -9,12 +9,12 @@ namespace ShopAdmin.Commands
     public class Product : ConsoleAppBase
     {
         private readonly ILogger<Product> _logger;
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IProductService _productService;
 
-        public Product(ILogger<Product> logger, ApplicationDbContext dbContext)
+        public Product(ILogger<Product> logger, IProductService productService)
         {
             _logger = logger;
-            _dbContext = dbContext;
+            _productService = productService;
         }
 
         public void verifyimage()
@@ -22,7 +22,7 @@ namespace ShopAdmin.Commands
             _logger.LogInformation("VerifyImage starting");
 
             List<string> missingUrls = new();
-            foreach (var product in _dbContext.Products)
+            foreach (var product in _productService.GetAllProducts())
             {
                 string imageUrl = product.ImageUrl;
 
@@ -51,7 +51,7 @@ namespace ShopAdmin.Commands
             _logger.LogInformation("Export starting");
 
             List<ProductModel> products = new();
-            foreach (var currentProduct in _dbContext.Products)
+            foreach (var currentProduct in _productService.GetAllProducts())
             {
                 ProductModel product = new()
                 {
@@ -62,8 +62,8 @@ namespace ShopAdmin.Commands
                     Rating = 0,
                     Stock = 0,
                     Discount = 0,
-                    Brand = currentProduct.Manufacturer != null ? currentProduct.Manufacturer.Name : "",
-                    Category = currentProduct.Category != null ? currentProduct.Category.Name : "",
+                    Brand = currentProduct.ManufacturerName,
+                    Category = currentProduct.CategoryName,
                     Image = currentProduct.ImageUrl,
                 };
                 products.Add(product);
