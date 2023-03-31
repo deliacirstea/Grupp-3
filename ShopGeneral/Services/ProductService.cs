@@ -25,4 +25,12 @@ public  class ProductService : IProductService
             .OrderByDescending(e => e.AddedUtc)
             .Take(cnt)), context);
     }
+
+    public IEnumerable<ProductServiceModel> GetAllProducts()
+    {
+        return _mapper.Map<IEnumerable<ProductServiceModel>>(_context.Products
+            .Include(e => e.Category)
+            .Include(e => e.Manufacturer)
+            .OrderByDescending(e => e.AddedUtc));
+    }
 }
