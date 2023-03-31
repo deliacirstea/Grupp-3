@@ -17,7 +17,11 @@ namespace ShopAdmin.Commands
             _dbContext = dbContext;
         }
 
-        public void verifyimage()
+        public Product()
+        {
+        }
+
+        public void Verifyimage()
         {
             _logger.LogInformation("VerifyImage starting");
 
@@ -46,7 +50,8 @@ namespace ShopAdmin.Commands
 
             _logger.LogInformation("VerifyImage ending");
         }
-        public void export(string to)
+
+        public void Export(string to)
         {
             _logger.LogInformation("Export starting");
 
@@ -69,7 +74,7 @@ namespace ShopAdmin.Commands
                 products.Add(product);
             }
 
-            ExportProduct result = new() { products = products, total = products.Count };
+            ExportProduct result = new() { Products = products, Total = products.Count };
 
             string directoryPath = $"outfiles\\{to}\\";
             string filePath = $"{directoryPath}\\{DateTime.UtcNow:yyyyMMdd}.txt";

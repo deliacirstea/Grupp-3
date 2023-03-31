@@ -18,7 +18,8 @@ namespace ShopAdmin.Commands
             _logger = logger;
             _agreementService = agreementService;
         }
-        public void Expires( int days)
+
+        public void Expires(int days)
         {
             _logger.LogInformation("Expires starting");
             foreach (var agreement in _agreementService.GetActiveAgreements()

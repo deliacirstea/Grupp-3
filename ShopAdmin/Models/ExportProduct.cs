@@ -4,13 +4,13 @@ namespace ShopAdmin.Commands
 {
     public class ExportProduct
     {
-        public List<ProductModel> products { get; set; }
+        public List<ProductModel> Products { get; set; }
 
-        public int total { get; set; }
+        public int Total { get; set; }
 
-        public int skip { get; set; } = 0;
+        public int Skip { get; set; } = 0;
 
-        public int limit { get; set; } = 0;
+        public int Limit { get; set; } = 0;
     }
 
 }
