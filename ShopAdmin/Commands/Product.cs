@@ -69,7 +69,7 @@ namespace ShopAdmin.Commands
                 products.Add(product);
             }
 
-            ExportProduct result = new() { products = products, total = products.Count };
+            ExportProduct result = new() { products = products, total = products.Count, limit = products.Count, skip = 0 };
 
             string directoryPath = $"outfiles\\{to}\\";
             string filePath = $"{directoryPath}{DateTime.UtcNow:yyyyMMdd}.txt";
