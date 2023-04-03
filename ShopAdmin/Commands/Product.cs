@@ -30,7 +30,7 @@ namespace ShopAdmin.Commands
                 if (!exists)
                 {
                     Console.WriteLine($"Found a missing file:\n{imageUrl}");
-                    missingUrls.Add(imageUrl);
+                    missingUrls.Add(product.Id.ToString());
                 }
             }
 
