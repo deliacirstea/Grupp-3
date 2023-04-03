@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="Models\NewFile1.txt" />
+    <None Remove="NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>
