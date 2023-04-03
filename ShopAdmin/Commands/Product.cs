@@ -30,7 +30,7 @@ namespace ShopAdmin.Commands
                 if (!exists)
                 {
                     Console.WriteLine($"Found a missing file:\n{imageUrl}");
-                    missingUrls.Add(imageUrl);
+                    missingUrls.Add(product.Id.ToString());
                 }
             }
 
@@ -72,7 +72,7 @@ namespace ShopAdmin.Commands
             ExportProduct result = new() { products = products, total = products.Count };
 
             string directoryPath = $"outfiles\\{to}\\";
-            string filePath = $"{directoryPath}\\{DateTime.UtcNow:yyyyMMdd}.txt";
+            string filePath = $"{directoryPath}{DateTime.UtcNow:yyyyMMdd}.txt";
 
             // Serialize model to json string
             string json = JsonSerializer.Serialize(result, new JsonSerializerOptions() { WriteIndented = true });
