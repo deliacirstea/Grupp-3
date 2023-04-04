@@ -24,6 +24,7 @@ builder.ConfigureServices((ctx, services) =>
     services.AddTransient<IAgreementService, AgreementService>();
     services.AddTransient<IPricingService, PricingService>();
     services.AddTransient<IProductService, ProductService>();
+    services.AddTransient<ICategoryService, CategoryService>();
     services.AddAutoMapper(typeof(ShopGeneral.Infrastructure.Profiles.ProductProfile));
     services.AddTransient<DataInitializer>();
     // Using Cysharp/ZLogger for logging to file

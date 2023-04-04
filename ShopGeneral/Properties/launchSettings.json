@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ShopAdmin": {
+    "ShopGeneral": {
       "commandName": "Project",
       "commandLineArgs": "category checkempty\r\n"
     }
