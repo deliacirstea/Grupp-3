@@ -23,40 +23,60 @@ namespace ShopAdmin.Commands
             }
 
 
+
             public void checkempty()
             {
-
                 _logger.LogInformation("Checking category starting");
 
-                List<ProductModel> products = new();
+                string directoryPath = "outfiles\\categories\\";
+                string filePath = $"{directoryPath}\\missingproducts-{DateTime.UtcNow:yyyyMMdd}.txt";
 
-                foreach (var product in _productService.GetAllProducts())
+                var categories = _productService.GetAllProducts();
+
+                foreach (var category in categories)
                 {
+                    var products = _productService.GetProductsByCategoryId(category.Id);
 
-                    int category = product.CategoryId;
-
-
-
-
-
+                    
+                    if (products.Count() == 0)
+                    {
+                        string categoryName = category.Name;
+                        _logger.LogInformation($"Category {categoryName} has no products");
+                        System.IO.File.AppendAllText(filePath, categoryName + Environment.NewLine);
+                    }
                 }
 
-
-
-
-
-
-
-
-
-
-
-                string directoryPath = "outfiles\\categories\\";
-                string filePath = $"{directoryPath}\\missingcategories-{DateTime.UtcNow:yyyyMMdd}.txt";
-
                 _logger.LogInformation("Checking category ending");
-
             }
+
+
+
+
+            //public void checkempty()
+            //{
+
+            //    _logger.LogInformation("Checking category starting");
+
+            //    List<ProductModel> products = new();
+
+            //    foreach (var product in _productService.GetAllProducts())
+            //    {
+
+            //        int category = product.CategoryId;
+
+
+
+
+
+            //    }
+
+
+            //    string directoryPath = "outfiles\\categories\\";
+            //    string filePath = $"{directoryPath}\\missingcategories-{DateTime.UtcNow:yyyyMMdd}.txt";
+
+            //    _logger.LogInformation("Checking category ending");
+
+            //}
 
 
 

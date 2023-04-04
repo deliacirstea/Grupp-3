@@ -2,7 +2,7 @@
   "profiles": {
     "ShopAdmin": {
       "commandName": "Project",
-      "commandLineArgs": "product export --to pricerunner\r\nproduct verifyimage\r\nagreement expires --days 30"
+      "commandLineArgs": "category checkempty\r\nproduct export --to pricerunner\r\nproduct verifyimage\r\nagreement expires --days 30"
     }
   }
 }
