@@ -5,6 +5,8 @@ using ShopGeneral.Data;
 using ShopGeneral.Services;
 using Microsoft.EntityFrameworkCore;
 using ZLogger;
+using ShopAdmin.Interfaces;
+using ShopAdmin.Implementations;
 
 var builder = ConsoleApp.CreateBuilder(args);
 builder.ConfigureServices((ctx, services) =>
@@ -21,6 +23,7 @@ builder.ConfigureServices((ctx, services) =>
     services.AddTransient<IAgreementService, AgreementService>();
     services.AddTransient<IPricingService, PricingService>();
     services.AddTransient<IProductService, ProductService>();
+    services.AddTransient<IEmailService, EmailService>();
     services.AddAutoMapper(typeof(ShopGeneral.Infrastructure.Profiles.ProductProfile));
     services.AddTransient<DataInitializer>();
 
@@ -38,6 +41,3 @@ using (var scope = app.Services.CreateScope())
 app.AddAllCommandType();
 app.Run();
 Console.ReadKey(true);
-
-
-

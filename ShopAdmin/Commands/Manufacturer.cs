@@ -1,61 +1,61 @@
-﻿using MailKit;
-using MailKit.Net.Smtp;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using MimeKit;
-using ShopGeneral.Data;
+using ShopAdmin.Interfaces;
 
 namespace ShopAdmin.Commands
 {
     public class Manufacturer : ConsoleAppBase
     {
         private readonly ILogger<Manufacturer> _logger;
-        private readonly ApplicationDbContext _applicationDbContext;
-        private readonly SmtpClient _mailClient; 
+        private readonly IEmailService _emailService;
 
-        public Manufacturer(ILogger<Manufacturer> logger, ApplicationDbContext applicationDbContext)
+        public Manufacturer(ILogger<Manufacturer> logger, IEmailService emailService)
         {
             _logger = logger;
-            _applicationDbContext = applicationDbContext;
-            _mailClient = new();
+            _emailService = emailService;
         }
 
         public void Sendreport()
         {
             _logger.LogInformation("SendReport starting");
 
-            List<string> emails = _applicationDbContext.Manufacturers.Select(x => x.EmailReport).ToList();
+            // Do not send a report if its not the 3rd day of the month
+            // Note: this logic should not be in here but in the calling method
+            //if (DateTime.UtcNow.Day != 3)
+            //{
+            //    _logger.LogInformation("Mail reports is not supposed to be sent this day. Exiting method.");
+            //    return;
+            //}
 
-            _mailClient.Connect("smtp.ethereal.email", 587, false);
-            _mailClient.Authenticate("charity.becker@ethereal.email", "VvM2d8t7KQ6sfYggqC");
-            
-            MailboxAddress fromAddress = new MailboxAddress("Dennis Hankvist", "dennis@test.com");
+            List<string> emails = _emailService.GetEmails();
+
+            _emailService.Connect();
+            _emailService.Authenticate();
+
+            // Create and send mails to every manufacturer
+            MailboxAddress fromEmailAddress = _emailService.GetSenderMailAddress();
             foreach (var email in emails)
             {
-                MimeMessage message = new()
+                // Make sure that there are no spaces in the mail address
+                string recipientEmailAddress = email.Replace(" ", "");
+
+                // Create a new emailMessage
+                MimeMessage emailMessage = new()
                 {
-                    Subject = "Test subject",
-                    Body = new TextPart("plain") { Text = "Hello" },
+                    Subject = _emailService.GetMailSubject(),
+                    Body = _emailService.GetMailBody(recipientEmailAddress),
                 };
 
-                string mailTo = email.Replace(" ", "");
-                message.To.Add(new MailboxAddress(mailTo, mailTo));
-                message.From.Add(fromAddress);
+                emailMessage.To.Add(new MailboxAddress(recipientEmailAddress, recipientEmailAddress));
+                emailMessage.From.Add(fromEmailAddress);
 
-                _mailClient.Send(message);
+                _emailService.Send(emailMessage);
             }
 
-            _mailClient.Disconnect(true);
+            _emailService.Disconnect();
 
             _logger.LogInformation("SendReport ending");
         }
-        
-    }
-
-    public interface IEmailService
-    {
-        public List<string> GetEmails();
-
-        public void Send();
 
     }
 
