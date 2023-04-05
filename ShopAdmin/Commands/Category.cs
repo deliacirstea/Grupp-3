@@ -36,7 +36,7 @@ namespace ShopAdmin.Commands
                 {
                     if (product.CategoryId == category.Id)
                     {
-                        Console.WriteLine($"Kategori {category.Id} {category.Name} har minst en produkt kopplad.");
+                        Console.WriteLine($"Category {category.Id} {category.Name} has at least one product linked.");
                         isFound = true;
                         break;
                     }
@@ -44,7 +44,7 @@ namespace ShopAdmin.Commands
 
                 if(!isFound)
                 {
-                    Console.WriteLine($"Kategori {category.Id} {category.Name} har inga produkter kopplade.");
+                    Console.WriteLine($"Category {category.Id} {category.Name} has at least one product linked.");
                     // TODO: Add kategorins namn to the list of results
                     missingProducts.Add(category.Name);
                 }
