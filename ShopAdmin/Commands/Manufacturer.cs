@@ -56,7 +56,5 @@ namespace ShopAdmin.Commands
 
             _logger.LogInformation("SendReport ending");
         }
-
     }
-
 }
