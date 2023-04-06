@@ -5,7 +5,7 @@ using ShopGeneral.Infrastructure.Context;
 using ShopGeneral.Services;
 using System.Text.Json;
 
-namespace ShopAdmin.Tests
+namespace ShopAdmin.Tests.Commands
 {
     [TestClass]
     public class ProductTests
@@ -192,7 +192,7 @@ namespace ShopAdmin.Tests
             Assert.AreEqual(0, resultId);
         }
 
-        private static List<ProductServiceModel> CreateDefaultExportItems() => new () 
+        private static List<ProductServiceModel> CreateDefaultExportItems() => new()
         {
             new ProductServiceModel(){
                 Id = 0,
@@ -221,7 +221,7 @@ namespace ShopAdmin.Tests
             }
         };
 
-        private static List<ProductServiceModel> CreateDefaultVerifyImageItems() => new () 
+        private static List<ProductServiceModel> CreateDefaultVerifyImageItems() => new()
         {
             new ProductServiceModel() {
                 Id = 0,
@@ -238,7 +238,7 @@ namespace ShopAdmin.Tests
 
         public IEnumerable<ProductServiceModel> GetAllProducts() => Items;
 
-        public IEnumerable<ProductServiceModel> GetNewProducts(int cnt, CurrentCustomerContext context) => 
+        public IEnumerable<ProductServiceModel> GetNewProducts(int cnt, CurrentCustomerContext context) =>
             throw new NotImplementedException();
     }
 }
