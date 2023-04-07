@@ -23,17 +23,10 @@ namespace ShopAdmin.Commands
             string directoryPath = "outfiles\\category\\";
             string filePath = $"{directoryPath}missingproducts-{DateTime.UtcNow:yyyyMMdd}.txt";
 
-            var categories = _categoryService.GetTrendingCategories(100); // TODO: Custom implementation
-            var products = _productService.GetAllProducts(); // TODO: Custom implementation
-
-            // Abstract away to an interface
-            // Figure out tests:
-            //   - Kategorier som har kopplade produkter bör inte loggas
-            //   - Kategorier som inte har kopplade produkter bör loggas
-            //   - Rätt kategori loggas
-
-            // TODO: Declare the list here
-            List<string> missingProducts = new();
+            var categories = _categoryService.GetTrendingCategories(100); 
+            var products = _productService.GetAllProducts(); 
+                                           
+            List<string> categoriesWithNoProducts = new();
 
             foreach (var category in categories)
             {
@@ -52,17 +45,17 @@ namespace ShopAdmin.Commands
                 {
                     Console.WriteLine($"Category {category.Id} {category.Name} has at least one product linked.");
                     // TODO: Add kategorins namn to the list of results
-                    missingProducts.Add(category.Name);
+                    categoriesWithNoProducts.Add(category.Name);
                 }
             }
 
             // TODO: Append the list of results to the file (only if listan.Count > 0)
 
-            if (missingProducts.Count > 0)
+            if (categoriesWithNoProducts.Count > 0)
             {
                 Directory.CreateDirectory(directoryPath); // Make sure all directories exists
-                File.AppendAllLines(filePath, missingProducts);
-                _logger.LogInformation($"Logged{missingProducts.Count} missingproducts to {filePath}");
+                File.AppendAllLines(filePath, categoriesWithNoProducts);
+                _logger.LogInformation($"Logged{categoriesWithNoProducts.Count} missingproducts to {filePath}");
             }
             _logger.LogInformation("CheckEmpty ending");
         }
