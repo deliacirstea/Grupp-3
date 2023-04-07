@@ -24,7 +24,7 @@ namespace ShopAdmin.Commands
             List<string> missingUrls = new();
             foreach (var product in _productService.GetAllProducts())
             {
-                string imageUrl = product.ImageUrl;
+                string imageUrl = product.ImageUrl; 
 
                 bool exists = DoesImageExist(imageUrl);
                 if (!exists)
