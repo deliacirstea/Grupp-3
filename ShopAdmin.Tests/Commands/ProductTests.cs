@@ -241,9 +241,7 @@ namespace ShopAdmin.Tests.Commands
         public IEnumerable<ProductServiceModel> GetNewProducts(int cnt, CurrentCustomerContext context) =>
             throw new NotImplementedException();
 
-        public IEnumerable<ProductServiceModel> GetProductsByCategoryId(int categoryId)
-        {
+        public IEnumerable<ProductServiceModel> GetProductsByCategoryId(int categoryId) =>
             throw new NotImplementedException();
-        }
     }
 }
