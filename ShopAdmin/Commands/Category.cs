@@ -41,15 +41,12 @@ namespace ShopAdmin.Commands
                     }
                 }
 
-                if(!isFound)
+                if (!isFound)
                 {
-                    Console.WriteLine($"Category {category.Id} {category.Name} has at least one product linked.");
-                    // TODO: Add kategorins namn to the list of results
+                    Console.WriteLine($"Category {category.Id} {category.Name} does not have at least one product linked.");
                     categoriesWithNoProducts.Add(category.Name);
                 }
             }
-
-            // TODO: Append the list of results to the file (only if listan.Count > 0)
 
             if (categoriesWithNoProducts.Count > 0)
             {
